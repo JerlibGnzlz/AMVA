@@ -1,0 +1,24 @@
+{
+  "name": "vida-abundante",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "turbo": "latest",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "tsconfig-paths": "^4.2.0"
+  }
+}

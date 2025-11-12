@@ -1,0 +1,65 @@
+services:
+  web:
+    build: ./apps/web
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      - api
+    networks:
+      - vida_net
+
+  admin:
+    build: ./apps/admin
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    volumes:
+      - ./apps/admin:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      - api
+    networks:
+      - vida_net
+
+  api:
+    build: ./apps/api
+    ports:
+      - "3002:3002"
+    env_file:
+      - .env
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+    command: npm run start:dev
+    depends_on:
+      - db
+    networks:
+      - vida_net
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: jm1516
+      POSTGRES_DB: vida_abundante
+    ports:
+      - "5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - vida_net
+
+networks:
+  vida_net:
+
+volumes:
+  pgdata:

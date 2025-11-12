@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", // Compatible con Node.js
+    "target": "ES2022", // Última versión de JS soportada
+    "rootDir": "src", // Carpeta de código fuente
+    "outDir": "dist", // Carpeta de salida compilada
+    "baseUrl": ".", // Base para paths relativos
+    "paths": {
+      "@vida-abundante/ui": [
+        "../../packages/ui"
+      ],
+      "@vida-abundante/config": [
+        "../../packages/config"
+      ]
+    },
+    "esModuleInterop": true, // Permite importaciones de CommonJS
+    "allowSyntheticDefaultImports": true, // Soporte para imports por defecto
+    "emitDecoratorMetadata": true, // Necesario para NestJS
+    "experimentalDecorators": true, // Necesario para NestJS
+    "strict": true, // Todas las comprobaciones estrictas
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "sourceMap": true, // Para debugging
+    "declaration": true, // Genera archivos .d.ts
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src/**/*"
+  ], // Incluir todo el código fuente
+  "exclude": [
+    "node_modules",
+    "dist"
+  ] // Excluir node_modules y dist
+}
