@@ -1,23 +1,23 @@
-# Dockerfile-base (para web, admin, api)
+# Dockerfile (Desarrollo)
 FROM node:22-alpine
 
-# Establecer directorio de trabajo
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiamos package.json y package-lock.json
+# Copiar archivos de dependencias primero (para aprovechar cache de Docker)
 COPY package*.json ./
 
-# Instalar dependencias
+# Instalar dependencias (evita errores con peer deps)
 RUN npm install --legacy-peer-deps
 
-# Copiar todo el código
+# Copiar el resto del código fuente
 COPY . .
 
-# Build para producción (opcional)
-RUN npm run build 
+# Limpiar la carpeta dist ANTES de levantar el servidor
+RUN npx rimraf dist
 
-# Exponer puerto (cambiar según servicio)
+# Exponer el puerto de NestJS
 EXPOSE 3002
 
-# Comando por defecto para desarrollo
-CMD ["npm", "run",  "start:dev"]
+# Comando por defecto en desarrollo (watch mode)
+CMD ["sh", "-c", "npx rimraf dist && npm run start:dev"]

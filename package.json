@@ -15,6 +15,7 @@
     "docker:down": "docker compose down"
   },
   "devDependencies": {
+    "rimraf": "^6.1.0",
     "turbo": "latest",
     "typescript": "^5.9.3"
   },
