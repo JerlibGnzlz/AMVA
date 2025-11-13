@@ -1,0 +1,18 @@
+# apps/web/Dockerfile.dev
+FROM node:22-alpine
+
+WORKDIR /app
+
+# Copiar package json para cache deps
+COPY package*.json ./
+
+# Instalar dependencias
+RUN npm install --legacy-peer-deps
+
+# Copiar el resto (volumen en dev sobrescribe esto)
+COPY . .
+
+EXPOSE 3000
+
+# Desarrollo: next dev (usa -p 3000 en package.json)
+CMD ["npm", "run", "dev"]

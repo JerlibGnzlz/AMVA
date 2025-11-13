@@ -2,15 +2,11 @@ services:
   web:
     build:
       context: ./apps/web
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     ports:
       - "3000:3000"
     env_file:
-      - .env
-    volumes:
-      - ./apps/web:/app
-      - /app/node_modules
-    command: npm run dev
+      - .env.production
     depends_on:
       - api
     networks:
@@ -19,15 +15,11 @@ services:
   admin:
     build:
       context: ./apps/admin
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     ports:
       - "3001:3001"
     env_file:
-      - .env
-    volumes:
-      - ./apps/admin:/app
-      - /app/node_modules
-    command: npm run dev
+      - .env.production
     depends_on:
       - api
     networks:
@@ -36,15 +28,11 @@ services:
   api:
     build:
       context: ./apps/api
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     ports:
-      - "3002"
+      - "3002:3002"
     env_file:
-      - .env
-    volumes:
-      - ./apps/api:/app
-      - /app/node_modules
-    command: npm run start:dev
+      - .env.production
     depends_on:
       - db
     networks:
@@ -59,7 +47,7 @@ services:
       POSTGRES_PASSWORD: jm1516
       POSTGRES_DB: vida_abundante
     ports:
-      - "5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
